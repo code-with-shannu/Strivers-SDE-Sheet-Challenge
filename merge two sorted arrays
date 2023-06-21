@@ -1,0 +1,27 @@
+from math import *
+from collections import *
+from sys import *
+from os import *
+
+def ninjaAndSortedArrays(arr1,arr2,m,n):
+    #first add the elements of second array to the first by replacing the zeroes
+    for i in range(m,m+n):
+        arr1[i] = arr2[i-m]
+    #Now we will use gap method(Shell sort) that means we will be keeping two pointers
+    #at a gap of ceil(m+n/2) and we will continue this until gap becomes 1.
+    # In each iteration we will go through the array and checck the elements at both
+    #the pointers if they are in the correct manner then we wont do anything or else 
+    #we will swap
+    gap = (m+n)//2 + (m+n)%2
+    while(gap>0):
+        left = 0
+        right = gap
+        while right<m+n:
+            if arr1[left]>arr1[right]:
+                arr1[left],arr1[right] = arr1[right],arr1[left]
+            left+=1
+            right+=1
+        if gap==1:
+            break
+        gap = gap//2 + gap%2
+    return arr1      
